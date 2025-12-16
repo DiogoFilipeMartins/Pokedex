@@ -847,10 +847,13 @@ function App() {
           await removeFavoriteByPokemonId(pokemonId);
           setStatusMessage(`💔 ${capitalize(pokemon.name)} removido dos favoritos`);
         } else {
+          // Usar o sprite correto - se já vem no objeto pokemon, usa esse, senão usa o padrão
+          const spriteUrl = pokemon.sprite || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
+          
           await addFirebaseFavorite({
             id: pokemonId,
             name: pokemon.name,
-            sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`
+            sprite: spriteUrl
           });
           setStatusMessage(`❤️ ${capitalize(pokemon.name)} adicionado aos favoritos`);
         }
@@ -3134,10 +3137,11 @@ function App() {
                           gap: '12px'
                         }}>
                           {pokemonVariants.map((variant, i) => {
-                            const variantId = `${pokemonDetails.id}-${variant.name}`;
+                            // Usar o ID numérico real da variante - converter para string para comparação
+                            const variantIdStr = String(variant.id);
                             const isVariantFavorite = Array.isArray(favorites) 
-                              ? favorites.some(f => f.id === variantId)
-                              : favorites[variantId] !== undefined;
+                              ? favorites.some(f => String(f.id) === variantIdStr)
+                              : (favorites[variant.id] !== undefined || favorites[variantIdStr] !== undefined);
                             
                             return (
                             <div
@@ -3171,7 +3175,7 @@ function App() {
                                     id: variant.id,
                                     name: variant.name,
                                     sprite: variant.sprite
-                                  }, variantId);
+                                  });
                                 }}
                                 style={{
                                   position: 'absolute',

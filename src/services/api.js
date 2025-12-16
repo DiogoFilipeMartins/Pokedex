@@ -32,8 +32,8 @@ const validatePokemon = (pokemon) => {
   if (!pokemon.id || !pokemon.name) {
     throw new Error('Pokémon inválido: id e name são obrigatórios');
   }
-  if (typeof pokemon.id !== 'number' || pokemon.id < 1 || pokemon.id > 1025) {
-    throw new Error('ID do Pokémon inválido (deve ser entre 1 e 1025)');
+  if (typeof pokemon.id !== 'number' || pokemon.id < 1) {
+    throw new Error('ID do Pokémon inválido (deve ser maior que 0)');
   }
   if (typeof pokemon.name !== 'string' || pokemon.name.trim().length === 0) {
     throw new Error('Nome do Pokémon inválido');
