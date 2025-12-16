@@ -336,6 +336,10 @@ Este projeto utiliza dados da [PokéAPI](https://pokeapi.co/) que é gratuita e 
 - Dados: [PokéAPI](https://pokeapi.co/)
 - Sprites oficiais: The Pokémon Company
 - Fonte: [Poppins](https://fonts.google.com/specimen/Poppins)
+- Criadores:
+     Diogo Martins
+     Tomás Miguel
+     Davi Ramos
 
 ---
 
